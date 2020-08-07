@@ -3,11 +3,10 @@ import { Link, useHistory } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Auth } from "aws-amplify";
-import { onError } from "../libs/errorLib";
+import { onError } from "./libs/errorLib";
 import Routes from "./Routes";
 import { AppContext } from "./libs/contextLib";
 import "./App.css";
-import { onError } from "./libs/errorLib";
 
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -52,7 +51,12 @@ function App() {
           <Navbar.Collapse>
             <Nav pullRight>
               {isAuthenticated ? (
-                <NavItem onClick={handleLogout}>Logout</NavItem>
+                <>
+                  <LinkContainer to="/settings">
+                    <NavItem>Settings</NavItem>
+                  </LinkContainer>
+                  <NavItem onClick={handleLogout}>Logout</NavItem>
+                </>
               ) : (
                 <>
                   <LinkContainer to="/signup">
